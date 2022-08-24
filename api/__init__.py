@@ -1,3 +1,5 @@
+from api.models import Crime
+
 from flask import Flask, jsonify
 import psycopg2
 
