@@ -1,0 +1,22 @@
+CREATE TABLE crimes (
+    id SERIAL PRIMARY KEY,
+    lurn_sak INTEGER,
+    incident_date TIMESTAMP,
+    incident_reported_date DATE,
+    category VARCHAR(255),
+    stat INTEGER,
+    stat_desc VARCHAR(255),
+    address VARCHAR(255),
+    street VARCHAR (255),
+    city VARCHAR(255),
+    zip VARCHAR(10),
+    incident_id VARCHAR(255),
+    reporting_district INTEGER,
+    seq INTEGER,
+    gang_related VARCHAR(255),
+    unit_id VARCHAR(255),
+    unit_name VARCHAR(255),
+    longitude FLOAT,
+    latitude FLOAT,
+    part_category INTEGER
+);
