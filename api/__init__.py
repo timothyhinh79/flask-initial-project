@@ -1,3 +1,6 @@
+from api.models import Crime
+from api.orm import *
+
 from flask import Flask, jsonify
 import psycopg2
 
@@ -16,14 +19,16 @@ def create_app(user, password, database):
     def index():
         cursor = get_db(user, password, database)
         cursor.execute('SELECT * FROM crimes;')
-        crimes = cursor.fetchall()
-        return jsonify(crimes)
+        crime_records = cursor.fetchall()
+        crimes = [build_record(Crime, crime_record) for crime_record in crime_records]
+        return jsonify([crime.__dict__ for crime in crimes])
 
     @app.route('/crimes/<id>')
     def show(id):
         cursor = get_db(user, password, database)
         cursor.execute('SELECT * FROM crimes WHERE id = %s', vars = (id,))
-        crime = cursor.fetchone()
-        return jsonify(crime)
+        crime_record = cursor.fetchone()
+        crime = build_record(Crime, crime_record)
+        return jsonify(crime.__dict__)
 
     return app
